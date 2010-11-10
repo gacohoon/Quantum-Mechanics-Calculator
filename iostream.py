@@ -31,7 +31,9 @@ def parse(s):
 
 def assemble(tokenList):
     """Assembles valid tokens into an output string."""
-    pass
+    outputString = ''.join(tokenList) # combine tokens into string
+    outputString = outputString.replace('||', '|') # remove double pipes
+    return outputString
 
 
 if __name__ == '__main__':
