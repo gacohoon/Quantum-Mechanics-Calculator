@@ -39,9 +39,10 @@ outputDict = {class0: string0,
         raise ClassificationError(stringToClassify) # no match in dictionary
 
     def toToken(self, classToTokenize):
-        """Attempt to create string token from classes in dictionary"""
+        """Attempt to create string token from classes in dictionary. Also
+replaces 'val' with actual class.val value."""
         try:
-            token = self.outputDict[classToTokenize.__class__]
+            token = self.outputDict[classToTokenize.__class__] # lookup class
             return token.replace('val', classToTokenize.val)
         except KeyError:
             raise ClassificationError(classToTokenize)

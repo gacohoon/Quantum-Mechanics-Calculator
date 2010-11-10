@@ -1,5 +1,5 @@
-"""Module used to for string and determine if it is a valid
-expression of dirac notation in quantum mechanics."""
+"""iostream.py - handles input and output
+"""
 
 import re
 import QMTypes
@@ -22,11 +22,11 @@ def parse(s):
         tokenMatches = re.finditer(regex, s) # find all matches in string
         for eachMatch in tokenMatches:
             loc = eachMatch.span() # location of match: (begin, end)
-            token = s[loc[0]:loc[1]]
+            token = s[loc[0]:loc[1]] # string token
             tokenList.append([loc, token])
 
     tokenList.sort() # sort in place by location returned from span()
-    tokens = [item[1] for item in tokenList]
+    tokens = [item[1] for item in tokenList] # add only string tokens, not loc
     return tokens
 
 def assemble(tokenList):
