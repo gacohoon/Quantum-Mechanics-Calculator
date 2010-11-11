@@ -12,11 +12,16 @@ class InputError(Exception):
         return repr(self.msg)
 
 
-regexList = ['(<[a-zA-Z][a-zA-Z0-9]*[|])', # Bra
-             '([|][a-zA-Z][a-zA-Z0-9]*>)'] # Ket
+regexList = [r'<[a-zA-Z][a-zA-Z0-9]*[|]',  # Bra
+             r'[|][a-zA-Z][a-zA-Z0-9]*>',  # Ket
+             r'[a-zA-Z][a-zA-Z0-9]*',    # Operator
+             r'[+*/-]',                  # Operation
+             r'[+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?'] # number
+             
 
 def parse(s):
     """Parses string s into valid string tokens, eg Bra, Ket, number, etc."""
+    s = s.replace('|', '||') # double each pipe in string
     tokenList = []
     for regex in regexList:
         tokenMatches = re.finditer(regex, s) # find all matches in string
@@ -24,6 +29,7 @@ def parse(s):
             loc = eachMatch.span() # location of match: (begin, end)
             token = s[loc[0]:loc[1]] # string token
             tokenList.append([loc, token])
+            s = s.replace(token, ' '*len(token)) # replace token with spaces
 
     tokenList.sort() # sort in place by location returned from span()
     tokens = [item[1] for item in tokenList] # add only string tokens, not loc
@@ -37,7 +43,7 @@ def assemble(tokenList):
 
 
 if __name__ == '__main__':
-    test = '<a|b><c|d>'
-    t = ['<a|', '|b>', '<c|', '|d>']
+    test = '3*4/10.0<x|x>'
+    t = ['<x|', 'H', '|x>']
 
     print parse(test)
