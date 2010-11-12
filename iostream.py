@@ -31,6 +31,11 @@ def parse(s):
             tokenList.append([loc, token])
             s = s.replace(token, ' '*len(token), 1) # replace token with spaces
 
+    # check to make sure all characters have been removed from s
+    s = s.replace('|', ' ') # remove remaining pipes caused by single Bras/Kets
+    if len(s.strip()) != 0:
+        raise InputError(s.strip()) # display remaining characters in s
+
     tokenList.sort() # sort in place by location returned from span()
     tokens = [item[1] for item in tokenList] # add only string tokens, not loc
     return tokens
@@ -43,7 +48,7 @@ def assemble(tokenList):
 
 
 if __name__ == '__main__':
-    test = '2.32432e * A 2+2'
+    test = '2.32432e * A 2+2 e2'
     t = ['<x|', 'H', '|x>']
 
     print parse(test)
