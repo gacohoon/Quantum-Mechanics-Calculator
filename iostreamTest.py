@@ -19,7 +19,7 @@ class KnownStrings(unittest.TestCase):
                    ('2*2', ['2', '*', '2']),
                    ('2.34*A', ['2.34', '*', 'A']),
                    ('2.3e-10', ['2.3e-10']),
-                   ('-2', ['-2']))
+                   ('-2', ['-', '2']))
 
     def testParseKnownStrings(self):
         """parse should separate known strings into known tokens"""
