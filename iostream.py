@@ -12,11 +12,11 @@ class InputError(Exception):
         return repr(self.msg)
 
 
-regexList = [r'<[a-zA-Z][a-zA-Z0-9]*[|]',  # Bra
+regexList = [r'[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?', # number
+             r'<[a-zA-Z][a-zA-Z0-9]*[|]',  # Bra
              r'[|][a-zA-Z][a-zA-Z0-9]*>',  # Ket
              r'[a-zA-Z][a-zA-Z0-9]*',    # Operator
-             r'[+*/-]',                  # Operation
-             r'[+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?'] # number
+             '[+*/\-\^]']                  # Operation
              
 
 def parse(s):
@@ -29,7 +29,7 @@ def parse(s):
             loc = eachMatch.span() # location of match: (begin, end)
             token = s[loc[0]:loc[1]] # string token
             tokenList.append([loc, token])
-            s = s.replace(token, ' '*len(token)) # replace token with spaces
+            s = s.replace(token, ' '*len(token), 1) # replace token with spaces
 
     tokenList.sort() # sort in place by location returned from span()
     tokens = [item[1] for item in tokenList] # add only string tokens, not loc
@@ -43,7 +43,7 @@ def assemble(tokenList):
 
 
 if __name__ == '__main__':
-    test = '3*4/10.0<x|x>'
+    test = '2.32432e * A 2+2'
     t = ['<x|', 'H', '|x>']
 
     print parse(test)
