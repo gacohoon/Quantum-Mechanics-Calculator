@@ -34,7 +34,7 @@ class Ket(QMType):
 # Dictionary containing regular expressions of quantum mechanical string tokens
 # and their associated classes
 inputDict = {r'^([+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)$': Number,
-             '^([+*/-])$': Operation,
+             '^([+*/\-]|[\^])$': Operation,
              '^([a-zA-Z][a-zA-Z0-9]*)$': Operator,
              '^<([a-zA-Z][a-zA-Z0-9]*)[|]$': Bra,
              '^[|]([a-zA-Z][a-zA-Z0-9]*)>$': Ket}
