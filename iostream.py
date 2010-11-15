@@ -16,7 +16,7 @@ regexList = [r'[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?', # number
              r'<[a-zA-Z][a-zA-Z0-9]*[|]',  # Bra
              r'[|][a-zA-Z][a-zA-Z0-9]*>',  # Ket
              r'[a-zA-Z][a-zA-Z0-9]*',    # Operator
-             '[+*/\-\^]']                  # Operation
+             '[+*/\-]|\^']                  # Operation
              
 
 def parse(s):
