@@ -33,5 +33,14 @@ class KnownStrings(unittest.TestCase):
             result = iostream.assemble(terms)
             self.assertEqual(result, expression)
 
+class BadStrings(unittest.TestCase):
+    """Contains invalid input strings"""
+    badStrings = ('&', '$', '@', '<<a|', '<>', '1..')
+
+    def testBadStrings(self):
+        """bad strings should raise InputError"""
+        for string in self.badStrings:
+            self.assertRaises(iostream.InputError, iostream.parse, string)
+
 if __name__ == '__main__':
     unittest.main()
