@@ -25,6 +25,7 @@ value"""
                    ('-', Operation, '-'),
                    ('*', Operation, '*'),
                    ('/', Operation, '/'),
+                   ('^', Operation, '^'),
                    
                    ('<x|', Bra, 'x'),
                    ('<a01234|', Bra, 'a01234'),
