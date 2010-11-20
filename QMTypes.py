@@ -48,8 +48,8 @@ class Ket(State):
 
 class Expression(QMType):
     """Class for representing expressions as a list of objects: 2*|a> + 3*|b>"""
-    def __init__(self):
-        self.contents = []
+    def __init__(self, items=[]):
+        self.contents = items
     def AddToExpr(self, obj):
         self.contents.append(obj)
     def __repr__(self):
