@@ -31,6 +31,19 @@ class Ket(QMType):
     def __init__(self, name):
         QMType.__init__(self, name)
 
+class State(QMType):
+    """Class for representing bras and kets in Dirac notation: <a| or |a>"""
+    def __init__(self, stateType, name):
+        QMType.__init__(self, name)
+        self.stateType = stateType  #Bra or Ket
+    def __repr__(self):
+        retVal = ""
+        if self.stateType == "bra":
+            retVal += "<" + str(self.Val) + "|"
+        else:
+            retVal += "|" + str(self.Val) + ">"
+        return retVal
+
 # Dictionary containing regular expressions of quantum mechanical string tokens
 # and their associated classes
 inputDict = {r'^([+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)$': Number,
