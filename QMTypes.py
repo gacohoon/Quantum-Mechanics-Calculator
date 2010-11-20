@@ -1,5 +1,7 @@
 """Module containing quantum mechanical classes"""
 
+# classes created from user input
+
 class QMType(object):
     def __init__(self, val):
         self.val = val
@@ -21,20 +23,6 @@ class Operator(QMType):
     def __init__(self, name):
         QMType.__init__(self, name)
 
-
-class State(QMType):
-    """Class for representing bras and kets in Dirac notation: <a| or |a>"""
-    def __init__(self, stateType, name):
-        QMType.__init__(self, name)
-        self.stateType = stateType  #Bra or Ket
-    def __repr__(self):
-        retVal = ""
-        if self.stateType == "bra":
-            retVal += "<" + str(self.Val) + "|"
-        else:
-            retVal += "|" + str(self.Val) + ">"
-        return retVal
-
 class Bra(State):
     """Class for representing a bra in Dirac notation: <a|"""
     def __init__(self, name):
@@ -45,6 +33,15 @@ class Ket(State):
     def __init__(self, name):
         State.__init__(self, "ket", name)
 
+
+
+# classes that are used internally
+
+class State(QMType):
+    """Class for representing bras and kets in Dirac notation: <a| or |a>"""
+    def __init__(self, stateType, name):
+        QMType.__init__(self, name)
+        self.stateType = stateType  #Bra or Ket
 
 class Expression(QMType):
     """Class for representing expressions as a list of objects: 2*|a> + 3*|b>"""
