@@ -21,15 +21,6 @@ class Operator(QMType):
     def __init__(self, name):
         QMType.__init__(self, name)
 
-class Bra(QMType):
-    """Class for representing a bra in Dirac notation: <a|"""
-    def __init__(self, name):
-        QMType.__init__(self, name)
-
-class Ket(QMType):
-    """Class for representing a ket in Dirac notation: |a>"""
-    def __init__(self, name):
-        QMType.__init__(self, name)
 
 class State(QMType):
     """Class for representing bras and kets in Dirac notation: <a| or |a>"""
@@ -43,6 +34,17 @@ class State(QMType):
         else:
             retVal += "|" + str(self.Val) + ">"
         return retVal
+
+class Bra(State):
+    """Class for representing a bra in Dirac notation: <a|"""
+    def __init__(self, name):
+        State.__init__(self, "bra", name)
+
+class Ket(State):
+    """Class for representing a ket in Dirac notation: |a>"""
+    def __init__(self, name):
+        State.__init__(self, "ket", name)
+
 
 class Expression(QMType):
     """Class for representing expressions as a list of objects: 2*|a> + 3*|b>"""
