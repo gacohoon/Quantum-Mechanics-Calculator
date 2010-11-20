@@ -42,7 +42,10 @@ class Expression(QMType):
     def __init__(self, items=[]):
         self.contents = items
     def AddToExpr(self, obj):
-        self.contents.append(obj)
+        if isinstance(obj, list):
+            self.contents.expand(obj)
+        else:
+            self.contents.append(obj)
     def __repr__(self):
         retStr = ""
         for x in self.contents:
