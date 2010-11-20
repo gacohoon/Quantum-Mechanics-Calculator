@@ -1,6 +1,7 @@
 """Module used to convert between QMType classes and string tokens"""
 
 import re
+from QMTypes import Expression
 
 # Define exceptions
 class ClassificationError(Exception):
@@ -29,7 +30,7 @@ outputDict = {class0: string0,
         self.outputDict = outputDict
 
     def toClass(self, stringToClassify):
-        """Attempt to match string to an object in the dictionary."""
+        """Attempt to match string token to an object in the dictionary."""
         for regex, Type in self.inputDict.iteritems():
             match =  re.search(regex, stringToClassify)
             if match is not None:
@@ -46,4 +47,19 @@ replaces 'val' with actual class.val value."""
             return token.replace('val', classToTokenize.val)
         except KeyError:
             raise ClassificationError(classToTokenize)
-        
+
+    def toExpr(self, inputTokenList):
+        """Converts a list of string tokens into an expression"""
+        classList = []
+        for token in inputTokenList:
+            qmClass = c.toClass(token)
+            classList.append(qmClass)
+        return Expression(classList)
+
+    def toTokenList(self, expression):
+        """Converts an expression into a token list"""
+        tokenList = []
+        for qmClass in expression.contents:
+            token = c.toToken(qmClass)
+            tokenList.append(token)
+        return tokenList
