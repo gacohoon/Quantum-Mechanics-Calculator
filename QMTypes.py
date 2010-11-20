@@ -44,6 +44,18 @@ class State(QMType):
             retVal += "|" + str(self.Val) + ">"
         return retVal
 
+class Expression(QMType):
+    """Class for representing expressions as a list of objects: 2*|a> + 3*|b>"""
+    def __init__(self):
+        self.contents = []
+    def AddToExpr(self, obj):
+        self.contents.append(obj)
+    def __repr__(self):
+        retStr = ""
+        for x in self.contents:
+            retStr += str(x)
+        return retStr
+    
 # Dictionary containing regular expressions of quantum mechanical string tokens
 # and their associated classes
 inputDict = {r'^([+-]? *(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)$': Number,
